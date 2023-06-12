@@ -7,7 +7,10 @@ namespace EcommerceApp.Controllers
     {
         private readonly ApplicationDbContext _context; 
 
-        public ProducersController(ApplicationDbContext context) {  _context = context; }
+        public ProducersController(ApplicationDbContext context) 
+        {  
+            _context = context; 
+        }
         public IActionResult Index()
         {
             var prod = _context.Producers.ToList();
