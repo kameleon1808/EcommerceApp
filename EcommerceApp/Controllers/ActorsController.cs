@@ -13,10 +13,10 @@ namespace EcommerceApp.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
 
-            var data = _context.Actors.ToList();
+            var data = await _context.Actors.ToList();
             return View();
         }
     }
