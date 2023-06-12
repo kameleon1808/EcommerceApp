@@ -1,7 +1,7 @@
 ﻿using EcommerceApp.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BulkyBook.DataAccess.Data
+namespace EcommerceApp.Data
 {
     public class ApplicationDbContext : DbContext
     {

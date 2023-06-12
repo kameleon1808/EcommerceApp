@@ -1,5 +1,5 @@
 
-using BulkyBook.DataAccess.Data;
+using EcommerceApp.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,5 +43,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+//seed db
+AppDbInitializer.Seed(app);
 
 app.Run();
