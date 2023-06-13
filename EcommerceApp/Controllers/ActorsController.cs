@@ -18,7 +18,7 @@ namespace EcommerceApp.Controllers
         {
 
             var data = await _context.Actors.ToListAsync();
-            return View();
+            return View(data);
         }
     }
 }
