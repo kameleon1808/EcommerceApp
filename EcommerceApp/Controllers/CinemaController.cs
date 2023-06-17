@@ -14,7 +14,7 @@ namespace EcommerceApp.Controllers
         public async Task<IActionResult> Index()
         {
             var data = await _context.Cinemas.ToListAsync();
-            return View();
+            return View(data);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace EcommerceApp.Controllers
         public IActionResult Index()
         {
             var prod = _context.Producers.ToList();
-            return View();
+            return View(prod);
         }
     }
 }

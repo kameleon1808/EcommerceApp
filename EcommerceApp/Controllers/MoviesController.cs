@@ -10,9 +10,9 @@ namespace EcommerceApp.Controllers
         public MoviesController(ApplicationDbContext context) {  _context = context; }
         public async Task<IActionResult> IndexAsync()
         {
-            var data = await _context.Movies.ToListAsync();
+            var data = await _context.Movies.Include(n => n.Cinema).OrderBy(n=>n.Name).ToListAsync();
 
-            return View();
+            return View(data);
         }
     }
 }

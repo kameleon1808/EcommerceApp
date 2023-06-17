@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EcommerceApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230611213944_first-migration")]
-    partial class firstmigration
+    [Migration("20230617133151_Initial1")]
+    partial class Initial1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,7 +39,8 @@ namespace EcommerceApp.Migrations
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ProfilePictureURL")
                         .IsRequired()
@@ -63,6 +64,62 @@ namespace EcommerceApp.Migrations
                     b.HasIndex("MovieId");
 
                     b.ToTable("Actors_Movies");
+                });
+
+            modelBuilder.Entity("EcommerceApp.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplicationUser");
                 });
 
             modelBuilder.Entity("EcommerceApp.Models.Cinema", b =>
@@ -137,6 +194,58 @@ namespace EcommerceApp.Migrations
                     b.ToTable("Movies");
                 });
 
+            modelBuilder.Entity("EcommerceApp.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("EcommerceApp.Models.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovieId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItems");
+                });
+
             modelBuilder.Entity("EcommerceApp.Models.Producer", b =>
                 {
                     b.Property<int>("Id")
@@ -151,7 +260,8 @@ namespace EcommerceApp.Migrations
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ProfilePictureURL")
                         .IsRequired()
@@ -162,7 +272,7 @@ namespace EcommerceApp.Migrations
                     b.ToTable("Producers");
                 });
 
-            modelBuilder.Entity("EcommerceApp.Models.Test", b =>
+            modelBuilder.Entity("EcommerceApp.Models.ShoppingCartItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -173,17 +283,18 @@ namespace EcommerceApp.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("ShoppingCartId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Test");
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("ShoppingCartItems");
                 });
 
             modelBuilder.Entity("EcommerceApp.Models.Actor_Movie", b =>
@@ -224,6 +335,47 @@ namespace EcommerceApp.Migrations
                     b.Navigation("Producer");
                 });
 
+            modelBuilder.Entity("EcommerceApp.Models.Order", b =>
+                {
+                    b.HasOne("EcommerceApp.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("EcommerceApp.Models.OrderItem", b =>
+                {
+                    b.HasOne("EcommerceApp.Models.Movie", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EcommerceApp.Models.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("EcommerceApp.Models.ShoppingCartItem", b =>
+                {
+                    b.HasOne("EcommerceApp.Models.Movie", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+                });
+
             modelBuilder.Entity("EcommerceApp.Models.Actor", b =>
                 {
                     b.Navigation("Actors_Movies");
@@ -237,6 +389,11 @@ namespace EcommerceApp.Migrations
             modelBuilder.Entity("EcommerceApp.Models.Movie", b =>
                 {
                     b.Navigation("Actors_Movies");
+                });
+
+            modelBuilder.Entity("EcommerceApp.Models.Order", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("EcommerceApp.Models.Producer", b =>

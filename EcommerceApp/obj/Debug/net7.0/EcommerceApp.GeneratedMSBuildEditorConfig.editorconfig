@@ -16,16 +16,12 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\PC\Documents\Github\EcommerceApp\EcommerceApp
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/PC/Documents/Github/EcommerceApp/EcommerceApp/Deleted files/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = RGVsZXRlZCBmaWxlc1xJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/PC/Documents/Github/EcommerceApp/EcommerceApp/Deleted files/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = RGVsZXRlZCBmaWxlc1xQcml2YWN5LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/PC/Documents/Github/EcommerceApp/EcommerceApp/Views/Actors/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0b3JzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Documents/Github/EcommerceApp/EcommerceApp/Views/Cinema/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZW1hXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/PC/Documents/Github/EcommerceApp/EcommerceApp/Views/Error.cshtml]
@@ -38,6 +34,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/PC/Documents/Github/EcommerceApp/EcommerceApp/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Documents/Github/EcommerceApp/EcommerceApp/Views/Movies/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Documents/Github/EcommerceApp/EcommerceApp/Views/Producers/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjZXJzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/PC/Documents/Github/EcommerceApp/EcommerceApp/Views/Shared/_ValidationScriptsPartial.cshtml]
