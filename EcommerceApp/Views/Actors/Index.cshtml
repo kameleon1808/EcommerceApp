@@ -6,6 +6,7 @@
 }
 
 <h1>Actor Index</h1>
+<a type="button" asp-action="Create" asp-controller="Actors" class="btn btn-success">Add new</a>
 
 <table class="table">
     <thead>
@@ -34,7 +35,10 @@
                 </td>
             </tr>
         }
-        
-        
     </tbody>
 </table>
+
+@*<div style="position: fixed; right: 25px; bottom: 25px;" class="text-white">
+    <a asp-controller="Actors" asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add New
+    </a>
+</div>*@

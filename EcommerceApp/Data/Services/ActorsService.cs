@@ -1,13 +1,20 @@
 ﻿using EcommerceApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EcommerceApp.Data.Services
 {
     public class ActorsService : IActorsService
     {
+        private readonly ApplicationDbContext _context;
+        public ActorsService(ApplicationDbContext context) 
+        { 
+            _context = context;
+        }
 
         public void Add(Actor actor)
         {
-            throw new NotImplementedException();
+            _context.Actors.Add(actor);
+            _context.SaveChanges();
         }
 
         public void Delete(int id)
@@ -15,9 +22,11 @@ namespace EcommerceApp.Data.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Actor> GetAll()
+        public async Task<IEnumerable<Actor>> GetAll()
         {
-            throw new NotImplementedException();
+            var res = await _context.Actors.ToListAsync();
+            return res;
+            //throw new NotImplementedException();
         }
 
         public Actor GetById(int id)

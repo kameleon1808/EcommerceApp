@@ -1,25 +1,28 @@
 
 using EcommerceApp.Data;
+using EcommerceApp.Data.Services;
 using Microsoft.EntityFrameworkCore;
+
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews(); //=============zakom
-//builder.Services.AddControllersWithViews()
-//    .AddRazorOptions(options =>
-//    {
-//        options.ViewLocationFormats.Clear();
-//        options.ViewLocationFormats.Add("/Views/Home/{0}.cshtml");
-//        //options.ViewLocationFormats.Add("/Views/Shared/{0}.cshtml");
-//    });
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation(); //=============zakom
 
 
 
 //builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
-    )); ;
+    ));
+
+
+// Register the ActorsService
+builder.Services.AddScoped<IActorsService, ActorsService>();
+//builder.AddScoped<IActorsService, ActorsService>();
 //options.UseSqlServer(connection, b => b.MigrationsAssembly("BulkyBookWeb"));
 
 
