@@ -33,20 +33,14 @@ namespace EcommerceApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([Bind("FullName,ProfilePictureURL,Bio")] Actor actor)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(actor);
-            //}
-            //_service.Add(actor);
-            //return View("Index");
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
+                _service.Add(actor);
+                return RedirectToAction("Index");
+            }
+            else {
                 return View(actor);
             }
-
-            _service.Add(actor);
-            return RedirectToAction("Index");
-
         }
     }
 }
