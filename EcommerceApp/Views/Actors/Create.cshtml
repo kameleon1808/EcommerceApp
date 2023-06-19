@@ -5,10 +5,10 @@
 }
 @model Models.Actor
 
-<form asp-action="Create">
+<form asp-action="Create" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group text-center">
-        <img id="ProfilePictureURLPreview"/>
+        <img id="ProfilePictureURLPreview" />
     </div>
     <div class="form-group">
         <label asp-for="ProfilePictureURL">Profiler picture URL</label>
@@ -31,15 +31,15 @@
 
 
 @section Scripts{
-<script>
-    $(document).ready(function (){
+    <script>
+        $(document).ready(function () {
             var output = document.getElementById('ProfilePictureURLPreview');
             output.src = $('#ProfilePictureURL').val();
-    })
+        })
 
-    $("#ProfilePictureURL").on("change", function(){
+        $("#ProfilePictureURL").on("change", function () {
             var output = document.getElementById('ProfilePictureURLPreview');
             output.src = $(this).val();
-    })
-</script>
+        })
+    </script>
 }

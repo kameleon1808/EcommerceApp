@@ -29,18 +29,19 @@ namespace EcommerceApp.Controllers
             return View("Create");
         }
 
-        //[BindProperties]
         [HttpPost]
         public async Task<IActionResult> Create([Bind("FullName,ProfilePictureURL,Bio")] Actor actor)
         {
-            if (ModelState.IsValid)
+            //actors_movies is null and id = 0 jer u suprotnom jebe lud budalu.
+            if (!ModelState.IsValid && actor.Actors_Movies != null && actor.Id != 0)
             {
-                _service.Add(actor);
-                return RedirectToAction("Index");
-            }
-            else {
                 return View(actor);
             }
+            _service.Add(actor);
+            return RedirectToAction("Index");
+
+
         }
+        
     }
 }
