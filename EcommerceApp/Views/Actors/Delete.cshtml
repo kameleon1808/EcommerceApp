@@ -1,0 +1,44 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Models.Actor
+
+<h1>Removing user: @Model.FullName.ToString()</h1>
+
+<div class="form-group text-center">
+    <img id="ProfilePictureURLPreview" />
+</div>
+<form asp-action="Remove">
+    <div class="form-group">
+        <label asp-for="ProfilePictureURL">Profiler picture URL</label>
+        <input asp-for="ProfilePictureURL" type="text" class="form-control" readonly>
+        <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FullName">Full Name</label>
+        <input asp-for="FullName" type="text" class="form-control" readonly>
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Bio">Bio</label>
+        <input asp-for="Bio" type="text" class="form-control" readonly>
+        <span asp-validation-for="Bio" class="text-danger"></span><br></br>
+    </div>
+    @*<button class="btn btn-primary" type="submit" asp-action="Remove" asp-route-id="@Model.Id">Remove user</button>*@
+    <input type="hidden" asp-for="@Model.Id" />
+    <button class="btn btn-primary" type="submit" asp-action="Remove">Remove User</button>
+    <a type="button" class="btn btn-primary" asp-action="Index">Show All</a>
+</form>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePictureURLPreview');
+            output.src = $('#ProfilePictureURL').val();
+        })
+    </script>
+}

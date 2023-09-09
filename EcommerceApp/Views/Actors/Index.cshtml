@@ -28,15 +28,16 @@
                 <td>@item.Bio</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <a type="button" class="btn btn-primary">Edit</a> <p> | </p>
-                        <a type="button" class="btn btn-info">Details</a> <p> | </p>
-                        <a type="button" class="btn btn-danger">Delete</a>
+                        <a type="button" class="btn btn-primary" asp-controller="Actors" asp-action="Edit" asp-route-id="@item.Id">Edit</a> <p> | </p>
+                        <a type="button" class="btn btn-info" asp-controller="Actors" asp-action="Details" asp-route-id="@item.Id">Details</a> <p> | </p>
+                        <a type="button" class="btn btn-danger" asp-controller="Actors" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     </div>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
 
 @*<div style="position: fixed; right: 25px; bottom: 25px;" class="text-white">
     <a asp-controller="Actors" asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add New

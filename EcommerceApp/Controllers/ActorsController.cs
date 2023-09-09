@@ -20,7 +20,7 @@ namespace EcommerceApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var data = await _service.GetAll();
+            var data = await _service.GetAllAsync();
             return View(data);
         }
 
@@ -37,11 +37,100 @@ namespace EcommerceApp.Controllers
             {
                 return View(actor);
             }
-            _service.Add(actor);
+            await _service.AddAsync(actor);
             return RedirectToAction("Index");
-
-
         }
-        
+
+        //GET Actors/Details/id
+        public async Task<IActionResult> Details(int id)
+        { 
+            var data = await _service.GetByIdAsync(id);
+
+            if (data == null) 
+            {
+                return View("Empty"); 
+            } else
+            {
+                return View("ActorDetails",data);
+            }
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var data = await _service.GetByIdAsync(id);
+
+            if (data == null)
+            {
+                return View("Empty");
+            }
+            else
+            {
+                return View("Edit", data);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(int id, [Bind("Id,FullName,ProfilePictureURL,Bio")] Actor actor) 
+        {
+            if (!ModelState.IsValid && actor.Actors_Movies != null)
+            {
+                return View(actor);
+            }
+            else
+            {
+                await _service.UpdateAsync(id, actor);
+                return RedirectToAction("Index");
+            }
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var data = await _service.GetByIdAsync(id);
+
+            if (data == null)
+            {
+                return View("NotFound");
+            }
+            else
+            {
+                return View("Delete", data);
+                //await _service.DeleteAsync(id);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Remove(int id)
+        {
+            var data = await _service.GetByIdAsync(id);
+
+            if (data == null)
+            {
+                return View("NotFound");
+            }
+            else
+            {
+                await _service.DeleteAsync(id);
+                return RedirectToAction("Actors");
+            }
+        }
+        //Get: Actors/Delete/1
+        //public async Task<IActionResult> Delete(int id)
+        //{
+        //    var actorDetails = await _service.GetByIdAsync(id);
+        //    if (actorDetails == null) return View("NotFound");
+        //    return View(actorDetails);
+        //}
+
+        //[HttpPost/*, ActionName("Delete")*/]
+        //public async Task<IActionResult> Remove(int id)
+        //{
+        //    var actorDetails = await _service.GetByIdAsync(id);
+        //    if (actorDetails == null) return View("NotFound");
+
+        //    await _service.DeleteAsync(id);
+        //    return RedirectToAction(nameof(Index));
+        //}
+
+
     }
 }

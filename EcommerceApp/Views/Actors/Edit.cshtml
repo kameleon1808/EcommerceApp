@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Models.Actor
+
+<h1>Edit Details for user: @Model.FullName.ToString()</h1>
+
+<div class="form-group text-center">
+    <img id="ProfilePictureURLPreview" />
+</div>
+<form asp-action="Update" >
+    <div class="form-group">
+        <label asp-for="ProfilePictureURL">Profiler picture URL</label>
+        <input asp-for="ProfilePictureURL" type="text" class="form-control" >
+        <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FullName">Full Name</label>
+        <input asp-for="FullName" type="text" class="form-control" >
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Bio">Bio</label>
+        <input asp-for="Bio" type="text" class="form-control">
+        <span asp-validation-for="Bio" class="text-danger"></span><br></br>
+    </div>
+    <button type="submit" class="btn btn-primary" asp-action="Update" asp-route-id="@Model.Id">Update</button>
+    <a type="button" class="btn btn-primary" asp-action="Index">Show All</a>
+</form>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePictureURLPreview');
+            output.src = $('#ProfilePictureURL').val();
+        })
+    </script>
+}
